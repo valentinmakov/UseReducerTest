@@ -17,13 +17,13 @@ const ViewCounterMain: React.FC<IProps> = (props: IProps): React.ReactElement<IP
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Counter Main: {props.counterMain}</Text>
-            <TouchableOpacity style={styles.button} onPress={() => props.performIncrementCounterSecondary()}>
+            <TouchableOpacity style={styles.button} onPress={props.performIncrementCounterSecondary}>
                 <Text style={styles.buttonText}>Increment Counter Secondary</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => props.performDecrementCounterSecondary()}>
+            <TouchableOpacity style={styles.button} onPress={props.performDecrementCounterSecondary}>
                 <Text style={styles.buttonText}>Decrement Counter Secondary</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => props.performResetCounterSecondary()}>
+            <TouchableOpacity style={styles.button} onPress={props.performResetCounterSecondary}>
                 <Text style={styles.buttonText}>Reset Counter Secondary</Text>
             </TouchableOpacity>
         </View>

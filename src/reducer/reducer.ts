@@ -6,7 +6,7 @@ export const initialState: Models.IState = {
     counterSecondary: 0,
 }
 
-const reducer = (state: Models.IState = initialState, action: Models.IAction): Models.IState => {
+const reducer = (state: Models.IState, action: Models.IAction): Models.IState => {
     switch (action.type) {
         case actions.INCREMENT_COUNTER_MAIN:
             return {
