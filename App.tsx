@@ -6,6 +6,7 @@ import {
 } from 'react-native'
 
 import ContainerCounterMain from './src/containers/ContainerCounterMain'
+import ContainerCounterSecondary from './src/containers/ContainerCounterSecondary'
 
 const App: React.FC = (): React.ReactElement => {
     return (
@@ -14,6 +15,7 @@ const App: React.FC = (): React.ReactElement => {
             <SafeAreaView style={{backgroundColor: '#000', flex: 1}}>
                 <View style={{backgroundColor: '#000', flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                     <ContainerCounterMain/>
+                    <ContainerCounterSecondary/>
                 </View>
             </SafeAreaView>
         </>
