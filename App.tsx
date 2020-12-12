@@ -1,10 +1,11 @@
 import React from 'react'
 import {
     SafeAreaView,
-    View,
-    Text,
     StatusBar,
+    View,
 } from 'react-native'
+
+import ContainerCounterMain from './src/containers/ContainerCounterMain'
 
 const App: React.FC = (): React.ReactElement => {
     return (
@@ -12,7 +13,7 @@ const App: React.FC = (): React.ReactElement => {
             <StatusBar barStyle={'light-content'} />
             <SafeAreaView style={{backgroundColor: '#000', flex: 1}}>
                 <View style={{backgroundColor: '#000', flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                    <Text style={{color: '#FFF'}}>Test</Text>
+                    <ContainerCounterMain/>
                 </View>
             </SafeAreaView>
         </>
