@@ -1,10 +1,10 @@
-import React, {useReducer} from 'react'
+import React, {useContext} from 'react'
+import Context from '../context/context'
 import ViewCounterMain from '../components/ViewCounterMain'
-import reducer, {initialState} from '../reducer/reducer'
 import * as actions from '../actions/actions'
 
 const ContainerCounterMain: React.FC = (): React.ReactElement => {
-    const [state, dispatch] = useReducer(reducer, initialState)
+    const {state, dispatch} = useContext(Context)
 
     const performIncrementCounterSecondary = (): void => dispatch(actions.incrementCounterSecondary())
     const performDecrementCounterSecondary = (): void => dispatch(actions.decrementCounterSecondary())
