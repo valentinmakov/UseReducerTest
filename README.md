@@ -1,4 +1,4 @@
-*** UseReducerTest ***
+# UseReducerTest
 
 The purpose of the app is to test the combination of useReducer hook and Context as opposed to React Redux. The idea is that changes in reducer are watched and dispatched centrally by the Context.
 
