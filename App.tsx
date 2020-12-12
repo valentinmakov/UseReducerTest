@@ -16,17 +16,17 @@ import ContainerCounterMain from './src/containers/ContainerCounterMain'
 import ContainerCounterSecondary from './src/containers/ContainerCounterSecondary'
 
 interface IMemoizedContext {
-  state: Models.IState,
-  dispatch: React.Dispatch<Models.ICounerAction>,
+    state: Models.IState,
+    dispatch: React.Dispatch<Models.ICounerAction>,
 }
 
 const App: React.FC = (): React.ReactElement => {
-  const [state, dispatch] = useReducer(reducer, initialState)
-  const memoizedContextValues: IMemoizedContext = useMemo(() => {
-    return {state, dispatch}
-  }, [state, dispatch])
+    const [state, dispatch] = useReducer(reducer, initialState)
+    const memoizedContextValues: IMemoizedContext = useMemo(() => {
+        return {state, dispatch}
+    }, [state, dispatch])
 
-  return (
+    return (
         <Context.Provider value={{state: memoizedContextValues.state, dispatch: memoizedContextValues.dispatch}}>
             <StatusBar barStyle={'light-content'} />
             <SafeAreaView style={{backgroundColor: '#000', flex: 1}}>
