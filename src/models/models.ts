@@ -56,4 +56,9 @@ export namespace Enums {
         'Success' |
         'Failure'
     )
+
+    export type NetworkRequestType = (
+        'Main' |
+        'Secondary'
+    )
 }
