@@ -7,6 +7,10 @@ export const DECREMENT_COUNTER_SECONDARY = 'DECREMENT_COUNTER_SECONDARY'
 export const RESET_COUNTER_MAIN = 'RESET_COUNTER_MAIN'
 export const RESET_COUNTER_SECONDARY = 'RESET_COUNTER_SECONDARY'
 
+export const NETWORK_REQUEST_START = 'NETWORK_REQUEST_START'
+export const NETWORK_REQUEST_SUCCESS = 'NETWORK_REQUEST_SUCCESS'
+export const NETWORK_REQUEST_FAILURE = 'NETWORK_REQUEST_FAILURE'
+
 export const incrementCounterMain = (): Models.IAction => ({
     type: INCREMENT_COUNTER_MAIN,
 })
@@ -24,4 +28,16 @@ export const resetCounterMain = (): Models.IAction => ({
 })
 export const resetCounterSecondary = (): Models.IAction => ({
     type: RESET_COUNTER_SECONDARY,
+})
+
+export const networkRequestStart = (): Models.IAction => ({
+    type: NETWORK_REQUEST_START,
+})
+export const networkRequestSuccess = (response: string): Models.IAction => ({
+    type: NETWORK_REQUEST_SUCCESS,
+    payload: response,
+})
+export const networkRequestFailure = (error: Models.IError): Models.IAction => ({
+    type: NETWORK_REQUEST_FAILURE,
+    payload: error,
 })
