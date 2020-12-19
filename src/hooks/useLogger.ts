@@ -6,9 +6,11 @@ const useLogger = (reducer: Models.IReducer): Models.IReducer => {
         (state: Models.IState, action: Models.IAction): Models.IState => {
             const nextState: Models.IState = reducer(state, action)
 
-            console.log(`Previous State:\n${state}`)
-            console.log(`Action:\n${action}`)
-            console.log(`Next State:\n${nextState}`)
+            if (__DEV__) {
+                console.log('%cPrevious State:', 'color: grey; font-weight: 800;', state)
+                console.log('%cAction:', 'color: turquoise; font-weight: 800;', action)
+                console.log('%cNext State:', 'color: lime; font-weight: 800;', nextState)
+            }
 
             return nextState
         },
