@@ -18,4 +18,6 @@ export namespace Models {
     }
 
     export type IAction = (ICounerAction)
+
+    export type IReducer = (state: IState, action: IAction) => IState
 }

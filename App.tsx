@@ -10,6 +10,7 @@ import {
 
 import Context from './src/context/context'
 import reducer, {initialState} from './src/reducer/reducer'
+import useLogger from './src/hooks/useLogger'
 import {Models} from './src/models/models'
 
 import ContainerCounterMain from './src/containers/ContainerCounterMain'
@@ -21,7 +22,7 @@ interface IMemoizedContext {
 }
 
 const App: React.FC = (): React.ReactElement => {
-    const [state, dispatch] = useReducer(reducer, initialState)
+    const [state, dispatch] = useReducer(useLogger(reducer), initialState)
     const memoizedContextValues: IMemoizedContext = useMemo(() => {
         return {state, dispatch}
     }, [state, dispatch])
