@@ -11,6 +11,7 @@ export interface IProps {
     performIncrementCounterMain: () => void,
     performDecrementCounterMain: () => void,
     performResetCounterMain: () => void,
+    performCallNetworkRequestMain: () => void,
 }
 
 const ViewCounterSecondary: React.FC<IProps> = (props: IProps): React.ReactElement<IProps> => {
@@ -25,6 +26,9 @@ const ViewCounterSecondary: React.FC<IProps> = (props: IProps): React.ReactEleme
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={props.performResetCounterMain}>
                 <Text style={styles.buttonText}>Reset Counter Main</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.button, /* TODO styles for netwtork request states */]} onPress={props.performCallNetworkRequestMain}>
+                <Text style={styles.buttonText}>Send Main Network Request</Text>
             </TouchableOpacity>
         </View>
     )

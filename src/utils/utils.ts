@@ -6,6 +6,7 @@ import {
 
 export const performNetworkCall = <T>(
     networkCallType: Enums.NetworkRequestType,
+    converter: (response: any) => T,
     dispatch: React.Dispatch<Models.IAction>,
     networkStartAction: () => Models.IAction,
     networkSuccessAction: (response: T) =>  Models.IAction,
@@ -34,7 +35,7 @@ export const performNetworkCall = <T>(
         .call(requestUrl, {method: method})
         .then((response: Response): Promise<any> => response.json())
         .then((json: any): void => {
-            const response: T = json // TODO convert response; converter should be imported and have return type of T
+            const response: T = converter(json) // TODO convert response; converter should be imported and have return type of T
             dispatch(networkSuccessAction(response))
         })
         .catch((error: any) => {

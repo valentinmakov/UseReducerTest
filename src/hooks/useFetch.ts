@@ -15,6 +15,7 @@ const useFetch = (
         case 'Main':
             utils.performNetworkCall(
                 type,
+                (data: any) => data, // TODO comverter
                 dispatch,
                 actions.networkRequestStart,
                 actions.networkRequestSuccess,
