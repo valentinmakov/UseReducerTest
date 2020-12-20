@@ -16,14 +16,9 @@ import {Models} from './src/models/models'
 import ContainerCounterMain from './src/containers/ContainerCounterMain'
 import ContainerCounterSecondary from './src/containers/ContainerCounterSecondary'
 
-interface IMemoizedContext {
-    state: Models.IState,
-    dispatch: React.Dispatch<Models.ICounerAction>,
-}
-
 const App: React.FC = (): React.ReactElement => {
     const [state, dispatch] = useReducer(useLogger(reducer), initialState)
-    const memoizedContextValues: IMemoizedContext = useMemo(() => {
+    const memoizedContextValues: Models.IContext = useMemo(() => {
         return {state, dispatch}
     }, [state, dispatch])
 
