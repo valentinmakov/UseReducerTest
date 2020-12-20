@@ -4,6 +4,9 @@ import * as actions from '../actions/actions'
 export const initialState: Models.IState = {
     counterMain: 0,
     counterSecondary: 0,
+    response: null,
+    error: null,
+    networkPhase: 'Idle',
 }
 
 const reducer = (state: Models.IState, action: Models.IAction): Models.IState => {
@@ -37,6 +40,24 @@ const reducer = (state: Models.IState, action: Models.IAction): Models.IState =>
             return {
                 ...state,
                 counterSecondary: initialState.counterSecondary,
+            }
+        case actions.NETWORK_REQUEST_START:
+            return {
+                ...state,
+                networkPhase: 'InProgress',
+            }
+        case actions.NETWORK_REQUEST_SUCCESS:
+            return {
+                ...state,
+                networkPhase: 'Success',
+                response: action.payload,
+                error: null,
+            }
+        case actions.NETWORK_REQUEST_FAILURE:
+            return {
+                ...state,
+                networkPhase: 'Failure',
+                error: action.payload,
             }
         default:
             return state
