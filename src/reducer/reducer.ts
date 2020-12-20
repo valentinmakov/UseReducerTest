@@ -51,6 +51,7 @@ const reducer = (state: Models.IState, action: Models.IAction): Models.IState =>
                 ...state,
                 networkPhase: 'Success',
                 response: action.payload,
+                error: null,
             }
         case actions.NETWORK_REQUEST_FAILURE:
             return {

@@ -5,6 +5,7 @@ import {
 } from '../models/models'
 import * as actions from '../actions/actions'
 import * as utils from '../utils/utils'
+import * as converters from '../converters/converters'
 
 const useFetch = (
     type: Enums.NetworkRequestType,
@@ -13,13 +14,19 @@ const useFetch = (
 ): void => {
     switch (type) {
         case 'Main':
+            dispatch(actions.networkRequestStart())
+
             utils.performNetworkCall(
                 type,
-                (data: any) => data, // TODO comverter
-                dispatch,
-                actions.networkRequestStart,
-                actions.networkRequestSuccess,
-                actions.networkRequestFailure,
+                converters.convertResponse,
+
+                (responseConverted: Models.IResponseConverted): void => {
+                    dispatch(actions.networkRequestSuccess(responseConverted.responseData))
+                },
+
+                (error: any): void => {
+                    dispatch(actions.networkRequestFailure(error))
+                },
             )
             break
         case 'Secondary':

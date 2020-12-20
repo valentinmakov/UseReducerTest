@@ -1,6 +1,10 @@
 import * as actions from '../actions/actions'
 
 export namespace Models {
+    export interface IContext {
+        state: Models.IState,
+        dispatch: React.Dispatch<Models.IAction>,
+    }
     export interface IState {
         counterMain: number,
         counterSecondary: number,
@@ -47,6 +51,23 @@ export namespace Models {
     )
 
     export type IReducer = (state: IState, action: IAction) => IState
+
+    export interface IResponse {
+        data: IResponseData[],
+    }
+
+    export interface IResponseData {
+        id: number,
+        user_id: number,
+        title: string,
+        body: string,
+        created_at: string,
+        updated_at: string,
+    }
+
+    export interface IResponseConverted {
+        responseData: string,
+    }
 }
 
 export namespace Enums {

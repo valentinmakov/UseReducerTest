@@ -1,4 +1,3 @@
-import React from 'react'
 import {
     Enums,
     Models,
@@ -7,20 +6,16 @@ import {
 export const performNetworkCall = <T>(
     networkCallType: Enums.NetworkRequestType,
     converter: (response: any) => T,
-    dispatch: React.Dispatch<Models.IAction>,
-    networkStartAction: () => Models.IAction,
-    networkSuccessAction: (response: T) =>  Models.IAction,
-    networkFailureAction: (error: Models.IError) => Models.IAction,
+    onSuccess: (responseConverted: T) => void,
+    onFailure: (error: any) => void,
 ): void => {
-    dispatch(networkStartAction())
-
     let requestUrl: string
     let method: string | undefined
 
     switch (networkCallType) {
         case 'Main':
-            requestUrl = 'TODO'
-            method = 'POST'
+            requestUrl = 'https://gorest.co.in/public-api/users/122/posts'
+            method = 'GET'
             break
         case 'Secondary':
             requestUrl = 'TODO'
@@ -31,15 +26,58 @@ export const performNetworkCall = <T>(
             break
     }
 
-    fetch
-        .call(requestUrl, {method: method})
+    fetch(requestUrl, {method: method})
         .then((response: Response): Promise<any> => response.json())
         .then((json: any): void => {
-            const response: T = converter(json) // TODO convert response; converter should be imported and have return type of T
-            dispatch(networkSuccessAction(response))
+            console.log({
+                requestType: networkCallType,
+                requestUrl: requestUrl,
+                method: method,
+                requestResult: json,
+            })
+            if (json.code && json.code !== 200) {
+                const techError: Models.IError = {
+                    code: json.code,
+                    message: 'Technical error',
+                }
+
+                onFailure(techError)
+            }
+
+            try {
+                const response: T = converter(json)
+                onSuccess(response)
+            } catch (error: any) {
+                const customError: Models.IError = {
+                    message: error.message ? error.message : 'Unknown error',
+                }
+
+                if (error.code) {
+                    customError.code = error.code
+                }
+
+                onFailure(customError)
+            }
         })
         .catch((error: any) => {
-            const errorFormatted: Models.IError = {message: 'message'} // TODO convert error to errorFormatted
-            dispatch(networkFailureAction(errorFormatted))
+            console.log({
+                requestType: networkCallType,
+                requestUrl: requestUrl,
+                method: method,
+                requestError: error,
+            })
+            const errorFormatted: Models.IError = {
+                message: error.message ? error.message : 'Unknown error',
+            }
+
+            if (error.code) {
+                errorFormatted.code = error.code
+            }
+
+            if (error.comment) {
+                errorFormatted.comment = error.comment
+            }
+
+            onFailure(errorFormatted)
         })
 }
